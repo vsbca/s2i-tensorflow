@@ -5,3 +5,8 @@
 #    https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+#echo 'Starting Tensorboard'
+RUN tensorboard --logdir ./ --host 0.0.0.0 --port 6006 &
+
+#echo 'Starting Jupyter'
+RUN jupyter notebook "$@" 
