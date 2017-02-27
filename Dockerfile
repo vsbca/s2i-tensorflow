@@ -51,9 +51,10 @@ RUN pip --no-cache-dir install \
         numpy \
         scipy \
         sklearn \
+        pandas \
         Pillow \
         && \
-    python -m ipykernel.kernelspec
+python -m ipykernel.kernelspec
 
 # --- DO NOT EDIT OR DELETE BETWEEN THE LINES --- #
 # These lines will be edited automatically by parameterized_docker_build.sh. #
@@ -74,4 +75,3 @@ USER 1001
 WORKDIR $HOME
 
 CMD ["/usr/libexec/s2i/usage"]
-
