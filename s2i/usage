@@ -1,0 +1,10 @@
+#!/bin/bash -e
+cat <<EOF
+This is the TensorFlow S2I image:
+To use it, install S2I: https://github.com/openshift/source-to-image
+Sample invocation:
+s2i build source/ s2i-tensorflow tensorflow-app
+You can then run the resulting image via:
+docker run -d -p 8888:8888 tensorflow-app
+and see the test via http://localhost:8888
+EOF
