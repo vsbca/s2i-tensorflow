@@ -62,4 +62,4 @@ USER 1001
 
 WORKDIR $HOME
 
-CMD ["/usr/libexec/s2i/usage"]
+CMD ["python3","/ctx2/misp-trend.py"]
