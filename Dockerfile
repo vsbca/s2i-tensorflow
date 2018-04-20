@@ -1,15 +1,12 @@
 FROM openshift/base-centos7
 
-MAINTAINER Albert T Wong <atwong@alumni.uci.edu>
+MAINTAINER Virendrab <virendra@test.com>
 
 ENV \ 
     HOME=/opt/app-root/src
 
 # Set the labels that are used for Openshift to describe the builder image.
-LABEL io.k8s.description="Tensorflow" \
-    io.k8s.display-name="Tensorflow" \
-    io.openshift.expose-services="6006:http" \
-    io.openshift.expose-services="8888:http" \
+LABEL 
     io.openshift.tags="builder" \
     io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
     io.openshift.s2i.destination="/opt/app-root"
@@ -45,13 +42,9 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     rm get-pip.py
 
 RUN pip --no-cache-dir install \
-        ipykernel \
-        jupyter \
-        matplotlib \
-        numpy \
-        scipy \
-        sklearn \
         pandas \
+        pymisp \
+        requests \
         Pillow \
         && \
 python -m ipykernel.kernelspec
@@ -63,11 +56,6 @@ python -m ipykernel.kernelspec
 # RUN rm -f /_PIP_FILE_
 
 # Install TensorFlow CPU version from central repo
-RUN pip --no-cache-dir install \
-http://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp27-none-linux_x86_64.whl
-
-EXPOSE 6006/tcp 8888/tcp
-
 COPY  ["s2i/run", "s2i/assemble", "s2i/save-artifacts", "s2i/usage", "/usr/libexec/s2i/"]
 
 USER 1001
